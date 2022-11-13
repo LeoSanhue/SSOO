@@ -155,6 +155,7 @@ void *Print(void *threadarg)
    if(archive.fail()){
       cout << "No se pudo abrir el archivo\n";
       exit(1);
+      
    }else{
        i = 0;
        while(!archive.eof()){
