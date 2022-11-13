@@ -25,7 +25,7 @@ class Ping
             int sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
             if(sock < 0)
             {
-                printf("Failed to create socket!\n");
+                printf("Falla en la creacion del socket!\n");
                 close(sock);
                 exit(1);
             }
