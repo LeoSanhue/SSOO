@@ -1,11 +1,10 @@
-output: ssoo.o ping.o
-	g++ ssoo.o ping.o -o output
+output: ssoo.o execute.o
 
 ssoo.o: SSOO.cpp
 	g++ -c SSOO.cpp
 
-ping.o: ping.cpp
-	g++ -c ping.cpp
+execute.o: SSOO.cpp archivo_listado_ips.txt
+	./SSOO archivo_listado_ips.txt
 
 clean: 
 	rm *.o output
