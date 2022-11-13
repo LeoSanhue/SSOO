@@ -25,7 +25,7 @@ class Ping
             int sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
             if(sock < 0)
             {
-                printf("Failed to create socket!\n");
+                printf("Falla en la creacion del socket!\n");
                 close(sock);
                 exit(1);
             }
@@ -39,7 +39,7 @@ class Ping
             hostent *h = gethostbyname(_host.c_str());
             if(not h)
             {
-                printf("Failed to get host by name!\n");
+                printf("No se pudo obtener el nombre/direccion del host!\n");
                 close(sock);
                 exit(1);
             }
@@ -82,13 +82,13 @@ class Ping
                 int bytes = sendto(sock, packet, sizeof(packet), 0, (sockaddr *)&pingaddr, sizeof(sockaddr_in));
                 if(bytes < 0)
                 {
-                    printf("Failed to send to receiver\n");
+                    printf("No se pudo comunicar\n");
                     close(sock);
                     exit(1);
                 }
                 else if(bytes != sizeof(packet))
                 {
-                    printf("Failed to write the whole packet --- bytes: %d, sizeof(packet): %d\n", bytes, sizeof(packet));
+                    printf("FAllo en escribir el paquete --- bytes: %d, sizeof(packet): %d\n", bytes, sizeof(packet));
                     close(sock);
                     exit(1);
                 }
@@ -102,14 +102,14 @@ class Ping
                     bytes = recvfrom(sock, inbuf, sizeof(inbuf), 0, (sockaddr *)&pingaddr, (socklen_t *)&addrlen);
                     if(bytes < 0)
                     {
-                        printf("Error on recvfrom\n");
+                        printf("Error en recvfrom\n");
                         exit(1);
                     }
                     else
                     {
                         if(bytes < sizeof(iphdr) + sizeof(icmphdr))
                         {
-                            printf("Incorrect read bytes!\n");
+                            printf("Falla en la lectura de bytes!\n");
                             continue;
                         }
 
@@ -139,7 +139,7 @@ class Ping
                                 id = ntohs(p->un.echo.id);
                                 if(origid == pid)
                                 {
-                                    printf("        IDs match!\n");
+                                    printf("        IDs coinciden!\n");
                                     break;
                                 }
                             }
